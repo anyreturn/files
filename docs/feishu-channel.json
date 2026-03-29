@@ -1,0 +1,73 @@
+{
+  "channels": {
+    "feishu": {
+      "enabled": true,
+      "appId": "cli_xxxxxxxxxxxxx",
+      "appSecret": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "verificationToken": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "encryptKey": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "botName": "OpenClaw 多 Agent",
+      "defaultModel": "qwen3.5-plus",
+      "multiAgent": {
+        "enabled": true,
+        "roles": ["coordinator", "developer", "researcher", "tester", "writer", "analyst"],
+        "maxConcurrent": 3,
+        "responseOrder": "priority",
+        "avoidDuplicateResponses": true
+      },
+      "messageConfig": {
+        "replyToMention": true,
+        "replyToKeyword": true,
+        "keywords": ["@机器人", "分配任务", "总结", "进度", "开发", "测试", "调研", "文档"],
+        "ignoreSelf": true,
+        "contextLimit": 50
+      },
+      "eventSubscriptions": [
+        "im.message.receive_v1",
+        "im.chat.member.group.add_v1"
+      ],
+      "webhook": {
+        "path": "/feishu/webhook",
+        "port": 19000
+      }
+    }
+  },
+  "agentRoles": {
+    "coordinator": {
+      "name": "协调员",
+      "mentions": ["@协调员", "@coordinator", "@管理员"],
+      "keywords": ["分配", "总结", "进度", "安排", "任务"],
+      "priority": "high"
+    },
+    "developer": {
+      "name": "开发工程师",
+      "mentions": ["@开发", "@developer", "@工程师"],
+      "keywords": ["代码", "bug", "功能", "实现", "技术", "开发", "程序"],
+      "priority": "medium"
+    },
+    "researcher": {
+      "name": "研究员",
+      "mentions": ["@调研", "@researcher", "@研究员"],
+      "keywords": ["调研", "搜索", "分析", "资料", "查询", "研究"],
+      "priority": "medium"
+    },
+    "tester": {
+      "name": "测试工程师",
+      "mentions": ["@测试", "@tester", "@质检"],
+      "keywords": ["测试", "验证", "检查", "质量", "bug", "问题"],
+      "priority": "medium"
+    },
+    "writer": {
+      "name": "文案专员",
+      "mentions": ["@文案", "@writer", "@文档"],
+      "keywords": ["文档", "写作", "文案", "报告", "总结", "文章"],
+      "priority": "low"
+    },
+    "analyst": {
+      "name": "数据分析师",
+      "mentions": ["@分析", "@analyst", "@数据"],
+      "keywords": ["数据", "分析", "统计", "图表", "报表"],
+      "priority": "medium"
+    }
+  }
+}
