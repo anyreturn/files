@@ -1,0 +1,93 @@
+{
+  "multiAgentChat": {
+    "enabled": true,
+    "mode": "group",
+    "description": "多 Agent 群聊模式配置"
+  },
+  "agents": {
+    "defaults": {
+      "model": "qwen3.5-plus",
+      "thinking": "on",
+      "autoReply": true,
+      "responseDelay": 1000
+    },
+    "roles": {
+      "coordinator": {
+        "name": "协调员",
+        "model": "qwen3.5-plus",
+        "thinking": "on",
+        "description": "负责群聊协调、任务分配和总结",
+        "priority": "high",
+        "autoTrigger": ["分配任务", "总结", "进度"],
+        "maxTasks": 20
+      },
+      "developer": {
+        "name": "开发工程师",
+        "model": "qwen3.5-plus",
+        "thinking": "on",
+        "description": "负责代码开发、技术问题解决",
+        "priority": "medium",
+        "autoTrigger": ["代码", "开发", "bug", "实现", "功能"],
+        "maxTasks": 15
+      },
+      "tester": {
+        "name": "测试工程师",
+        "model": "qwen3.5-plus",
+        "thinking": "on",
+        "description": "负责测试、质量保障",
+        "priority": "medium",
+        "autoTrigger": ["测试", "bug", "验证", "检查"],
+        "maxTasks": 10
+      },
+      "researcher": {
+        "name": "研究员",
+        "model": "qwen3.5-plus",
+        "thinking": "on",
+        "description": "负责信息搜集、调研分析",
+        "priority": "medium",
+        "autoTrigger": ["调研", "搜索", "分析", "资料", "查询"],
+        "maxTasks": 10
+      },
+      "writer": {
+        "name": "文案专员",
+        "model": "qwen3.5-plus",
+        "thinking": "off",
+        "description": "负责文档撰写、内容创作",
+        "priority": "low",
+        "autoTrigger": ["文档", "写作", "文案", "报告", "总结"],
+        "maxTasks": 10
+      },
+      "analyst": {
+        "name": "数据分析师",
+        "model": "qwen3.5-plus",
+        "thinking": "on",
+        "description": "负责数据分析、图表生成",
+        "priority": "medium",
+        "autoTrigger": ["数据", "分析", "统计", "图表"],
+        "maxTasks": 10
+      }
+    }
+  },
+  "chatRules": {
+    "mentionTrigger": true,
+    "keywordTrigger": true,
+    "contextAware": true,
+    "maxConcurrentAgents": 3,
+    "responseOrder": "priority",
+    "avoidDuplicateResponses": true,
+    "summarizeAfterMessages": 10
+  },
+  "routing": {
+    "strategy": "smart",
+    "fallback": "coordinator",
+    "loadBalancing": true,
+    "stickySessions": false
+  },
+  "notifications": {
+    "onAgentJoin": true,
+    "onAgentLeave": true,
+    "onTaskAssigned": true,
+    "onTaskComplete": true,
+    "summarizeInterval": 3600
+  }
+}
